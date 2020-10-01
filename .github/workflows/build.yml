@@ -39,5 +39,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Kudadigital_https-github.com-filetrust-mvp-icap-service-security-testing" /o:"kudadigital" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet restore **/*.sln /t:Clean
           dotnet build **/*.sln /t:Clean
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
