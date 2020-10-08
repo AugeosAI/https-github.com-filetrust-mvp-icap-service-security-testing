@@ -28,4 +28,5 @@ jobs:
       
     - name: Build the new image and delete the old image 
       run: |
-        docker build  -t my_new_image .
+        docker run
+        docker start -a my_image .
