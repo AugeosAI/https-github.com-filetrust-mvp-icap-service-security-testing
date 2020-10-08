@@ -1,3 +1,20 @@
+#######################################################
+# Step 1: Build the application in a container        #
+#######################################################
+# Download the official ASP.NET Core SDK image
+# to build the project while creating the docker image
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
+
+ARG SONAR_PROJECT_KEY=Kudadigital_https-github.com-filetrust-mvp-icap-service-security-testing
+ARG SONAR_OGRANIZAION_KEY=kudadigital 
+ARG SONAR_HOST_URL=https://sonarcloud.io
+ARG SONAR_TOKEN
+
+# Install Sonar Scanner, Coverlet and Java (required for Sonar Scanner)
+RUN apt-get update && apt-get install -y openjdk-11-jdk
+RUN dotnet tool install --global dotnet-sonarscanner
+RUN dotnet tool install --global coverlet.console
+
 FROM ubuntu as base
 RUN apt-get update && apt-get upgrade -y
 
@@ -50,6 +67,29 @@ FROM dotnet-runtime
 COPY --from=build /usr/local/c-icap /usr/local/c-icap
 COPY --from=build /run/c-icap /run/c-icap
 COPY --from=dotnet-builder /src/cloud-proxy-app/source/bin/Release/netcoreapp3.1/publish /usr/local/bin
+
+# Start Sonar Scanner
+RUN dotnet sonarscanner begin \
+  /k:"$SONAR_PROJECT_KEY" \
+  /o:"$SONAR_OGRANIZAION_KEY" \
+  /d:sonar.host.url="$SONAR_HOST_URL" \
+  /d:sonar.login="$SONAR_TOKEN" \
+  /d:sonar.cs.opencover.reportsPaths=/coverage.opencover.xml
+
+# Restore NuGet packages
+COPY *.csproj .
+RUN dotnet restore
+
+# Copy the rest of the files over
+COPY . .
+
+# Build and test the application
+RUN dotnet publish 
+  /p:CollectCoverage=true \
+  /p:CoverletOutputFormat=opencover \
+  /p:CoverletOutput="/coverage"
+# End Sonar Scanner
+RUN dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 
 EXPOSE 1344
 CMD ["/usr/local/c-icap/bin/c-icap","-N","-D"]
