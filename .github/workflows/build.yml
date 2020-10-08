@@ -28,6 +28,4 @@ jobs:
       
     - name: Build the new image and delete the old image 
       run: |
-        docker stop my_image .
-        docker rm my_image .
         docker build -t new_image .
