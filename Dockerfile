@@ -78,13 +78,13 @@ RUN dotnet sonarscanner begin \
 
 # Restore NuGet packages
 COPY *.csproj .
-RUN dotnet restore
+# RUN dotnet restore
 
 # Copy the rest of the files over
 COPY . .
 
 # Build and test the application
-RUN dotnet publish 
+# RUN dotnet publish 
 # End Sonar Scanner
 RUN dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 
