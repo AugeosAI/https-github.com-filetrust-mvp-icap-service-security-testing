@@ -65,7 +65,7 @@ RUN apt-get install -y apt-transport-https && \
   apt-get install -y dotnet-runtime-3.1
     
 FROM dotnet-runtime
-COPY --from=build /usr/local/c-icap /usr/local/c-icap
+# COPY --from=build /usr/local/c-icap /usr/local/c-icap
 COPY --from=build /run/c-icap /run/c-icap
 COPY --from=dotnet-builder /src/cloud-proxy-app/source/bin/Release/netcoreapp3.1/publish /usr/local/bin
 
