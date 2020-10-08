@@ -11,6 +11,7 @@ ARG SONAR_HOST_URL=https://sonarcloud.io
 ARG SONAR_TOKEN
 
 # Install Sonar Scanner, Coverlet and Java (required for Sonar Scanner)
+ENV PATH="$PATH:/root/.dotnet/tools"
 RUN apt-get update && apt-get install -y openjdk-11-jdk
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
