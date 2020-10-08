@@ -85,9 +85,6 @@ COPY . .
 
 # Build and test the application
 RUN dotnet publish 
-  /p:CollectCoverage=true \
-  /p:CoverletOutputFormat=opencover \
-  /p:CoverletOutput="/coverage"
 # End Sonar Scanner
 RUN dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 
