@@ -26,7 +26,7 @@ RUN apt-get install -y curl gcc make libtool autoconf automake automake1.11 unzi
 COPY ./c-icap/ /tmp/c-icap/c-icap/
 COPY ./c-icap-modules /tmp/c-icap/c-icap-modules  
 
-FROM source as build    
+FROM source as new-build    
 RUN cd /tmp/c-icap/c-icap &&  \
     autoreconf -i && \
     ./configure --prefix=/usr/local/c-icap && make && make install
