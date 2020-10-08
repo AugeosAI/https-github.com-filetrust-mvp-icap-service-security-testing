@@ -12,12 +12,12 @@ ARG SONAR_TOKEN
 
 # Install Sonar Scanner, Coverlet and Java (required for Sonar Scanner)
 ENV PATH="$PATH:/root/.dotnet/tools"
+
+FROM ubuntu as base
 RUN apt-get update && apt-get install -y openjdk-11-jdk
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
 
-FROM ubuntu as base
-RUN apt-get update && apt-get upgrade -y
 
 FROM base as source
 RUN apt-get install -y curl gcc make libtool autoconf automake automake1.11 unzip && \
