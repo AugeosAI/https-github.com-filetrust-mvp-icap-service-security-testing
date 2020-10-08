@@ -66,8 +66,8 @@ RUN apt-get install -y apt-transport-https && \
     
 FROM dotnet-runtime
 # COPY --from=build /usr/local/c-icap /usr/local/c-icap
-COPY --from=build /run/c-icap /run/c-icap
-COPY --from=dotnet-builder /src/cloud-proxy-app/source/bin/Release/netcoreapp3.1/publish /usr/local/bin
+# COPY --from=build /run/c-icap /run/c-icap
+# COPY --from=dotnet-builder /src/cloud-proxy-app/source/bin/Release/netcoreapp3.1/publish /usr/local/bin
 
 # Start Sonar Scanner
 RUN dotnet sonarscanner begin \
