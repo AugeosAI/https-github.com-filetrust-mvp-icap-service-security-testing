@@ -2,7 +2,7 @@ name: "My CodeQL configuration"
 
 disable-default-queries: true
 
-languages: cpp, csharp
+languages: ${{ matrix.language }}
 
 queries:
   - name: Extended Security
