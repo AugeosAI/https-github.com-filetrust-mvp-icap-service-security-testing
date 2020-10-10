@@ -1,8 +1,6 @@
-name: "My CodeQL configuration"
+name: "My CodeQL config"
 
 disable-default-queries: true
-
-languages: ${{ matrix.language }}
 
 queries:
   - name: Extended Security
