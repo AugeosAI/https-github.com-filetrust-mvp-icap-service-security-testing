@@ -1,0 +1,9 @@
+FROM ubuntu:latest
+
+#install packages
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y curl gcc make libtool autoconf automake automake1.11 unzip wget
+
+#Install sonar scanner and build wrapper
+RUN cd /opt && wget -O sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.4.0.2170-linux.zip && unzip sonar.zi
+RUN cd /opt && wget -O build.zip https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip && unzip build.zip

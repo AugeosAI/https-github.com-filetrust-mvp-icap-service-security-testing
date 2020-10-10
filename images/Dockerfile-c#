@@ -1,0 +1,17 @@
+FROM ubuntu
+RUN  apt-get update \
+  && apt-get install -y wget \
+  && rm -rf /var/lib/apt/lists/*
+  
+RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+
+RUN apt-get install -y apt-transport-https && \
+  apt-get update && \
+  apt-get install -y dotnet-sdk-3.1
+
+#install java
+RUN apt-get install -y default-jre
+
+#install scanner tool
+RUN dotnet tool install --global dotnet-sonarscanner --version 4.10.0
