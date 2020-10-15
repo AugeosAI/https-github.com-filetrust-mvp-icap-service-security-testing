@@ -2,10 +2,10 @@
 name: sonar-csharp
 env:
   SONAR_ORG: kudadigital
-  SONAR_PROJECT: kudadigital_https-github.com-filetrust-mvp-icap-service-security-testing
+  SONAR_PROJECT: icap-csharp
 on:
   push:
-    branches: [ master ]
+    branches: '*'
     paths:
       - 'cloud-proxy-app/**'
   pull_request:
