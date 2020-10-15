@@ -1,4 +1,4 @@
-The c-icap server                         http://c-icap.sourceforge.net/
+# The c-icap server                         http://c-icap.sourceforge.net/
 -------------------------------------------------------------------------
 
 c-icap is an implementation of an ICAP server. It can be used with HTTP
