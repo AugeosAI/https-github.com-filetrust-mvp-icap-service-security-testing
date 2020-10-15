@@ -1,4 +1,4 @@
-﻿using Glasswall.IcapServer.CloudProxyApp.Configuration;
+using Glasswall.IcapServer.CloudProxyApp.Configuration;
 using Glasswall.IcapServer.CloudProxyApp.Setup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +45,6 @@ namespace Glasswall.IcapServer.CloudProxyApp
             }
         }
         #checking this code
-            string = "1234"
         private static void DisposeServices()
         {
             if (_serviceProvider == null)
