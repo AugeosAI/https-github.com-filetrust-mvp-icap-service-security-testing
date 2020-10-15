@@ -1,4 +1,4 @@
-name: sonar-c
+name: Sonar-c-icap
 on:
   push:
     branches: [ master ]
@@ -23,17 +23,8 @@ jobs:
         - name: build c-icap
           run: cd c-icap &&  autoreconf -i && ./configure --prefix=/usr/local/c-icap && /opt/build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory make install
 
-        - name: build c-icap-modules
-          run: cd c-icap-modules &&  autoreconf -i &&  ./configure --with-c-icap=/usr/local/c-icap --prefix=/usr/local/c-icap && /opt/build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory make install
-
         - name: scan c-icap
           run: cd c-icap && /opt/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-        - name: scan c-icap-modules
-          run: cd c-icap-modules && /opt/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
