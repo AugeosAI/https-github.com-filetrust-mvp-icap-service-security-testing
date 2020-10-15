@@ -44,7 +44,6 @@ namespace Glasswall.IcapServer.CloudProxyApp
                 DisposeServices();
             }
         }
-        #checking this code
         private static void DisposeServices()
         {
             if (_serviceProvider == null)
