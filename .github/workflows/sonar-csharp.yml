@@ -1,8 +1,8 @@
   
 name: sonar-csharp
 env:
-  SONAR_ORG: kudadigital
-  SONAR_PROJECT: icap-csharp
+  SONAR_ORG: augeos
+  SONAR_PROJECT: csharp-icap-new
 on:
   push:
     branches: '*'
@@ -22,7 +22,7 @@ jobs:
           with:
             submodules: true
 
-        - name: scan c# code
+        - name: scan csharp code
           run: |
             /root/.dotnet/tools/dotnet-sonarscanner begin   /o:"${{ env.SONAR_ORG }}"  /d:sonar.login="${{ secrets.SONAR_TOKEN }}"  /k:"${{ env.SONAR_PROJECT }}"  /d:sonar.host.url=https://sonarcloud.io /d:sonar.cfamily.build-wrapper-output="build_wrapper_output_directory"
             dotnet build cloud-proxy-app/cloud-proxy-app.sln
